@@ -1,5 +1,3 @@
-// Import stylesheets
-import './style.css';
 
 var index = [];
 
@@ -77,12 +75,10 @@ function main() {
 
 
 
-          }
-
   }
 
 
-    
+}
 
 }
 
