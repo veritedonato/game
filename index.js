@@ -43,3 +43,8 @@ function object (name) {
   
 
 }
+
+background("lightgreen");
+
+object("player");
+
