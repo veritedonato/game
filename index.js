@@ -3,14 +3,67 @@ import './style.css';
 
 var index = [];
 
-function start() {
+function main(name) {
 
-  var playerName = document.getElementById("playerName").value;
+  background("black");
 
-  setInterval(main(playerName),100);
 
+  player(250,250,name);
+
+
+  window.onkeydown = function(e) {
+
+      con
+
+    if ( e.keyChar == "w" || e.keyChar == "W" )
+  
+      if ( div = find(name) ) 
+
+        div.top -= 10;
+
+  
+    if ( e.keyChar == "s" || e.keyChar == "S" )
+
+  
+      if ( div = find(name) ) 
+
+        div.top += 10;
+
+
+    if ( e.keyChar == "a" || e.keyChar == "A" )
+
+
+      
+    if ( div = find(name) ) 
+
+      div.left -= 10;
+
+    if ( e.keyChar == "d" || e.keyChar == "D" )
+
+      
+    if ( div = find(name) ) 
+
+    div.left += 10;
+
+  
+  }
+  
+  
 
 }
+
+ 
+
+  document.getElementById ("startBtn").addEventListener ("click", function() {
+
+    var playerName = document.getElementById("playerName").value;
+    
+    setInterval(main(playerName),100);
+
+    document.getElementById('startGame').style.visibility = "hidden";
+    
+    }
+  , false);
 
 function background(color) {
 
@@ -92,52 +145,7 @@ function quest(x,y,name,text) {
 }
 
 
-function main(name) {
 
-  background("black");
-
-
-  player(250,250,name);
-
-
-  window.onkeydown = function(e) {
-
-    if ( e.keyChar == "w" || e.keyChar == "W" )
-  
-      if ( div = find(name) ) 
-
-        div.top -= 10;
-
-  
-    if ( e.keyChar == "s" || e.keyChar == "S" )
-
-  
-      if ( div = find(name) ) 
-
-        div.top += 10;
-
-
-    if ( e.keyChar == "a" || e.keyChar == "A" )
-
-
-      
-    if ( div = find(name) ) 
-
-      div.left -= 10;
-
-    if ( e.keyChar == "d" || e.keyChar == "D" )
-
-      
-    if ( div = find(name) ) 
-
-    div.left += 10;
-
-  
-  }
-  
-  
-
-}
 
 
 
