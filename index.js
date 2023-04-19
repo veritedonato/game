@@ -10,18 +10,8 @@ function background(color) {
 
 }
 
-function character() {
+function object (seed) {
 
   
+
 }
-
-function object() {
-
-  
-}
-
-function quest() {
-
-  
-}
-
