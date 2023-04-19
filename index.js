@@ -16,7 +16,7 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-function object (name) {
+function object () {
 
   for ( var i = 0; i < 10; i++ ) {
 
@@ -28,7 +28,7 @@ function object (name) {
 
     var color = "#" + r + g  + b;
 
-    var div = document.createElement(name + i);
+    var div = document.createElement("div");
 
     div.style.position = "absolute";
     div.style.left = x;
@@ -46,5 +46,5 @@ function object (name) {
 
 background("lightgreen");
 
-object("player");
+object();
 
