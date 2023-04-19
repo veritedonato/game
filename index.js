@@ -6,41 +6,79 @@ var playerX, playerY;
 var monsterX = [], monsterY = [];
 
 function getRandomInt(max) {
-  return 0;
+  return Math.floor(Math.random() * max);
 }
 
+function collide1(obj1,obj2) {
 
-function collide(obj1,obj2) {
 
-
-  if (obj1.style.left < 0 || obj1.style.left > window.innerWidth )  {
-
-    return true;
-
-  }
-
-  if (obj1.style.top < 0 || obj1.style.top > window.innerHeight )  {
-
-    return true;
-
-  }
-  if (obj2.x < 0 || obj2.x > window.innerWidth )  {
+  if (obj1.style.left < 64 || obj1.style.left > window.innerWidth  - 64 )  {
 
     return true;
 
   }
 
-  if (obj2.y < 0 || obj2.y > window.innerHeight )  {
+
+  if (obj1.style.top < 64 || obj1.style.top > window.innerHeight - 64 )  {
+
+    return true;
+
+  }
+  if (obj2.x < 64 || obj2.x > window.innerWidth - 64)  {
 
     return true;
 
   }
 
+  if (obj2.y < 64 || obj2.y > window.innerHeight  - 64)  {
+
+    return true;
+
+  }
 
     if (obj1.style.left < obj2.x + 64 && obj1.style.left > obj2.x - 64 ) 
       if (obj1.style.top < obj2.y + 64 && obj1.style.top > obj2.y - 64 ) 
 
         return true;
+
+
+   
+  return false;
+
+}
+
+function collide2(obj1,obj2) {
+
+
+  if (obj1.style.left < 64 || obj1.style.left > window.innerWidth  - 64 )  {
+
+    return true;
+
+  }
+
+
+  if (obj1.style.top < 64 || obj1.style.top > window.innerHeight - 64 )  {
+
+    return true;
+
+  }
+  if (obj2.style.left < 64 || obj2.style.left > window.innerWidth - 64)  {
+
+    return true;
+
+  }
+
+  if (obj2.style.top < 64 || obj2.style.top > window.innerHeight  - 64)  {
+
+    return true;
+
+  }
+
+    if (obj1.style.left < obj2.style.left + 64 && obj1.style.left > obj2.style.left - 64 ) 
+      if (obj1.style.top < obj2.style.top + 64 && obj1.style.top > obj2.style.top - 64 ) 
+
+        return true;
+
 
    
   return false;
@@ -81,7 +119,24 @@ background("black");
   
   
   }
-  
+
+
+  for ( var m1 = 1; m1 < index.length; m1++ ) {
+
+    for ( var m2 = 1; m2 < index.length; m2++ ) {
+
+          if ( collide2(m1,m2) )
+
+          {
+
+                
+              
+
+          }
+
+    }
+
+}
 
 
 }
@@ -94,10 +149,24 @@ setInterval(function() {
     var x =   getRandomInt(64);
     var y =   getRandomInt(64);
 
-    var tmp = {"x":x,"y":y};
-    if ( collide(m,tmp) )
+    var signedx = getRandomInt(1000);
+    var signedy = getRandomInt(1000);
 
-      continue
+    if ( signedx < 500 )
+
+    x = -x;
+    if ( signedy < 500 )
+
+    y = -y;
+
+    var tmp = {"x":index[m].style.left,"y":index[m].style.top};
+    if ( collide1(index[m],tmp) ) {
+
+          x = -x;
+          y = -y;
+
+
+    }
 
     move(m,x,y);
 
