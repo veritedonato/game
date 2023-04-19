@@ -49,9 +49,8 @@ function collide(obj1,obj2) {
 
 function main() {
 
-/*
 
-  background("black");
+background("black");
 
 
   player(250,250);
@@ -59,9 +58,9 @@ function main() {
 
 
 
-      for ( var x = 0; x < window.innerWidth; x += 64 ) {
+      for ( var x = 0; x < window.innerWidth; x += 128 ) {
 
-          for ( var y = 0; y < window.innerHeight; y += 64 ) {
+          for ( var y = 0; y < window.innerHeight; y += 128 ) {
 
           var chance = getRandomInt(1000);
 
@@ -70,7 +69,7 @@ function main() {
                 monsterX.push(x);
                 monsterY.push(y);
 
-            monster(x,y);
+//            monster(x,y);
 
           }
 
@@ -82,7 +81,6 @@ function main() {
 
 }
 
-*/
 
 }
 
