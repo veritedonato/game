@@ -3,6 +3,15 @@ import './style.css';
 
 var index = [];
 
+function start() {
+
+  var playerName = document.getElementById("playerName").value;
+
+  setInterval(main(playerName),100);
+
+
+}
+
 function background(color) {
 
   document.body.style.backgroundColor = color;
@@ -87,19 +96,49 @@ function main(name) {
 
   background("black");
 
+
   player(250,250,name);
 
 
+  window.onkeydown = function(e) {
+
+    if ( e.keyChar == "w" || e.keyChar == "W" )
+  
+      if ( div = find(name) ) 
+
+        div.top -= 10;
+
+  
+    if ( e.keyChar == "s" || e.keyChar == "S" )
+
+  
+      if ( div = find(name) ) 
+
+        div.top += 10;
+
+
+    if ( e.keyChar == "a" || e.keyChar == "A" )
+
+
+      
+    if ( div = find(name) ) 
+
+      div.left -= 10;
+
+    if ( e.keyChar == "d" || e.keyChar == "D" )
+
+      
+    if ( div = find(name) ) 
+
+    div.left += 10;
+
+  
+  }
+  
+  
+
 }
 
-function setPlayer() {
-
-  var playerName = document.getElementById("playerName").value;
-
-  setInterval(main(playerName),100);
-
-
-}
 
 
 function find(name) {
@@ -111,18 +150,6 @@ function find(name) {
         return div;
 
     return null;
-
-}
-
-window.onkeydown = function(e) {
-
-  if ( e.keyChar == "w" || e.keyChar == "W" )
-
-    if ( find("player1") )
-
-  if ( e.keyChar == "s" || e.keyChar == "S" )
-  if ( e.keyChar == "a" || e.keyChar == "A" )
-  if ( e.keyChar == "d" || e.keyChar == "D" )
 
 }
 
