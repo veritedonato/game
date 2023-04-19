@@ -47,45 +47,61 @@ let perlin = {
 }
 perlin.seed();
 
-// Write Javascript code!
-var appDiv = document.getElementById('app');
-
 var objIndex = [];
 
 function background(color) {
 
-  appDiv.style.backgroundColor = color;
+  document.body.style.backgroundColor = color;
 
 }
-
-background("lightgreen");
 
 function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
+  return Math.random() * max;
 }
 
-function object () {
+function object (a,b) {
 
-  for ( var i = 0; i < 10; i++ ) {
+var x = 0, y = 0;
 
-    var r = perlin.get(getRandomInt(256),getRandomInt(256)).toString(16);
-    var g = perlin.get(getRandomInt(256),getRandomInt(256)).toString(16);
-    var b = perlin.get(getRandomInt(256),getRandomInt(256)).toString(16);
-    var x = perlin.get(getRandomInt(window.innerWidth),getRandomInt(window.innerHeight));
-    var y = perlin.get(getRandomInt(window.innerWidth),getRandomInt(window.innerHeight));
+while(1) {
 
-    var color = "#" + r + g  + b;
+    var c = Math.floor((Math.abs(perlin.get(getRandomInt(256),getRandomInt(256))*256)*1000000)).toString(16);
+
+    var color = "#" + c;
+
+    console.log(color);
+
+    console.log(a + x);
+    console.log(b + y);
 
     var div = document.createElement("div");
 
     div.style.position = "absolute";
-    div.style.left = x;
-    div.style.top = y;
+    div.style.left = a + x;
+    div.style.top = b + y;
     div.style.backgroundColor = color;
     div.style.width = 64;
     div.style.height = 64;
 
+    document.body.appendChild(div);
+
     objIndex.push(div);
+
+    x += 8;
+
+    if ( x >= 64 )
+
+    {
+
+        x = 0;
+
+        y += 8;
+
+        if ( y >= 64 )
+
+            break;
+
+    }
 
   }
   
@@ -93,4 +109,6 @@ function object () {
 }
 
 
+background("lightgreen");
 
+object(250,250);
