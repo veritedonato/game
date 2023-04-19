@@ -48,7 +48,7 @@ let perlin = {
 perlin.seed();
 
 // Write Javascript code!
-const appDiv = document.getElementById('app');
+var appDiv = document.getElementById('app');
 
 var objIndex = [];
 
@@ -57,6 +57,8 @@ function background(color) {
   appDiv.style.backgroundColor = color;
 
 }
+
+background("lightgreen");
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -90,7 +92,5 @@ function object () {
 
 }
 
-background("lightgreen");
 
-object();
 
