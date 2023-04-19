@@ -49,6 +49,8 @@ function collide(obj1,obj2) {
 
 function main() {
 
+/*
+
   background("black");
 
 
@@ -80,6 +82,8 @@ function main() {
 
 }
 
+*/
+
 }
 
 setInterval(function() {
@@ -91,7 +95,6 @@ setInterval(function() {
     var y =   getRandomInt(64);
 
     var tmp = {"x":x,"y":y};
-
     if ( collide(m,tmp) )
 
       continue
