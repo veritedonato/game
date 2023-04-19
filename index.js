@@ -7,42 +7,40 @@ var playerX, playerY;
 
 var monsterX = [], monsterY = [];
 
-var tileX = [], tileY = [];
-
-var questX = [], questY = [];
-
-var npcX = [], npcY = [];
-
-var spellX = [], spellY = [];
-
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-function collideWorldBounds(x,y) {
-
-  if (x < 0 || x > window.innerWidth )  {
-
-    return true;
-
-  }
-
-  if (y < 0 || y > window.innerHeight )  {
-
-    return true;
-
-  }
-
-  return false;
-
-
-}
 
 function collide(obj1,obj2) {
 
 
-    if (obj1.style.left < obj2.style.left + 10 && obj1.style.left > obj2.style.left - 10 ) 
-      if (obj1.style.top < obj2.style.top + 10 && obj1.style.top > obj2.style.top - 10 ) 
+  if (obj1.style.left < 0 || obj1.style.left > window.innerWidth )  {
+
+    return true;
+
+  }
+
+  if (obj1.style.top < 0 || obj1.style.top > window.innerHeight )  {
+
+    return true;
+
+  }
+  if (obj2.style.left < 0 || obj2.style.left > window.innerWidth )  {
+
+    return true;
+
+  }
+
+  if (obj2.style.top < 0 || obj2.style.top > window.innerHeight )  {
+
+    return true;
+
+  }
+
+
+    if (obj1.style.left < obj2.style.left + 64 && obj1.style.left > obj2.style.left - 64 ) 
+      if (obj1.style.top < obj2.style.top + 64 && obj1.style.top > obj2.style.top - 64 ) 
 
         return true;
 
@@ -58,151 +56,65 @@ function main() {
 
   player(250,250);
 
-  var m = [];
 
-   for ( var i = 0; i < 10; i++ ) {
 
-      monsterX.push(getRandomInt(window.innerWidth));
-      monsterY.push(getRandomInt(window.innerHeight));
 
-      m.push(monster(monsterX,monsterY));
+      for ( var x = 0; x < window.innerWidth; x += 64 ) {
 
+          for ( var y = 0; y < window.innerHeight; y += 64 ) {
+
+          var chance = getRandomInt(1000);
+
+          if ( chance < 100 ) {
+
+                monsterX.push(x);
+                monsterY.push(y);
+
+            monster(x,y);
+
+          }
+
+
+
+
+          }
 
   }
 
-  for ( var i = 0; i < m.length; i++ )
 
-      {
-
-
-        if (collideWorldBounds(m[i].style.left,m[i].style.top))
-
-        {
-
-
-          if ( m[i].style.left < 0 )
-
-              {
-
-                  monsterX[i] += 64;
-
-                  m[i].style.left = monsterX[i] + "px";
-
-              }
-
-          if ( m[i].style.left > window.innerWidth ) {
-
-            monsterX[i] -= 64;
-
-            m[i].style.left = monsterX[i] + "px";
-
-
-          }
-
-          if ( m[i].style.top > window.innerHeight )
-
-            {
-
-              monsterY[i] -= 64;
-
-              m[i].style.top = monsterY[i] + "px";
-
-
-            }
-
-            if ( m[i].style.top < 0 )
-
-            {
-
-              monsterY[i] += 64;
-
-              m[i].style.top = monsterY[i] + "px";
-
-
-            }
-
-
-
-        }
-
-          for ( var j = 0 ; j < m.length; j++ )
-
-
-          if (collideWorldBounds(m[j].style.left, m[j].style.top))
-
-          {
-  
-  
-            if ( m[j].style.left < 0 )
-  
-                {
-  
-                    monsterX[j] += 64;
-  
-                    m[j].style.left = monsterX[j] + "px";
-  
-                }
-  
-            if ( m[j].style.left > window.innerWidth ) {
-  
-              monsterX[j] -= 64;
-  
-              m[j].style.left = monsterX[j] + "px";
-  
-  
-            }
-  
-            if ( m[j].style.top > window.innerHeight )
-  
-              {
-  
-                monsterY[j] -= 64;
-  
-                m[j].style.top = monsterY[j] + "px";
-  
-  
-              }
-  
-              if ( m[j].style.top < 0 )
-  
-              {
-  
-                monsterY[j] += 64;
-  
-                m[j].style.top = monsterY[j] + "px";
-  
-  
-              }
-  
-  
-  
-          }
-  
-
-          if (collide(m[i],m[j]))
-
-          {
-
-            monsterX[i] -= 64;
-            monsterY[i] -= 64;
-
-
-                m[i].style.left = monsterX[i] + "px";
-                m[i].style.top = monsterY[i] + "px";
-
-                monsterX[i] += 64;
-                monsterY[i] += 64;
-    
-    
-                    m[j].style.left = monsterX[i] + "px";
-                    m[j].style.top = monsterY[i] + "px";
     
 
+}
 
-          }
+setInterval(function() {
 
 
-      }
+  for ( var m = 1; m < index.length; m++ ) {
+
+
+    
+
+  }
+
+
+},100);
+
+function move(i,x,y) {
+
+  monsterX[i] += x;
+  monsterY[i] += y;
+
+  if ( monsterY[i] < 0 || monsterY[i] > window.innerHeight )
+
+      return
+  if ( monsterX[i] < 0 || monsterX[i] > window.innerWidth )
+
+      return
+
+
+      index[i].style.top = monsterY[i] + "px";
+      index[i].style.left = monsterX[i] + "px";
+
 
 }
 
@@ -212,7 +124,7 @@ window.onkeydown = function(e) {
 
   if ( e.keyCode == 37 ) {
 
-    playerX -= 10;
+    playerX -= 64;
 
     if ( playerX < 0 || playerX > window.innerWidth )
 
@@ -225,7 +137,7 @@ window.onkeydown = function(e) {
 
 if ( e.keyCode == 39 ) {
 
-  playerX += 10;
+  playerX += 64;
 
   if ( playerX < 0 || playerX > window.innerWidth )
 
@@ -238,7 +150,7 @@ if ( e.keyCode == 39 ) {
 
 if ( e.keyCode == 38 ) {
 
-  playerY -= 10;
+  playerY -= 64;
 
   if ( playerY < 0 || playerY > window.innerHeight )
 
@@ -253,7 +165,7 @@ if ( e.keyCode == 38 ) {
 
 if ( e.keyCode == 40 ) {
 
-  playerY += 10;
+  playerY += 64;
 
   if ( playerY < 0 || playerY > window.innerHeight )
 
@@ -315,9 +227,6 @@ function npc(x,y) {
   div.style.height = 64 + "px";
   div.style.backgroundColor = "bisque";
   div.id = "npc";
-
-  playerX = x;
-  playerY = y;
 
   document.body.appendChild(div);
 
