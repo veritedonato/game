@@ -65,7 +65,7 @@ var x = 0, y = 0;
 
 while(1) {
 
-    var c = Math.floor((Math.abs(perlin.get(getRandomInt(256),getRandomInt(256))*256)*1000000)).toString(16);
+    var c = Math.floor((Math.abs(perlin.get(getRandomInt(256),getRandomInt(256))*256)*100000)).toString(16);
 
     var color = "#" + c;
 
