@@ -24,21 +24,21 @@ function collide(obj1,obj2) {
     return true;
 
   }
-  if (obj2.style.left < 0 || obj2.style.left > window.innerWidth )  {
+  if (obj2.x < 0 || obj2.x > window.innerWidth )  {
 
     return true;
 
   }
 
-  if (obj2.style.top < 0 || obj2.style.top > window.innerHeight )  {
+  if (obj2.y < 0 || obj2.y > window.innerHeight )  {
 
     return true;
 
   }
 
 
-    if (obj1.style.left < obj2.style.left + 64 && obj1.style.left > obj2.style.left - 64 ) 
-      if (obj1.style.top < obj2.style.top + 64 && obj1.style.top > obj2.style.top - 64 ) 
+    if (obj1.style.left < obj2.x + 64 && obj1.style.left > obj2.x - 64 ) 
+      if (obj1.style.top < obj2.y + 64 && obj1.style.top > obj2.y - 64 ) 
 
         return true;
 
@@ -89,6 +89,12 @@ setInterval(function() {
 
     var x =   getRandomInt(64);
     var y =   getRandomInt(64);
+
+    var tmp = {"x":x,"y":y};
+
+    if ( collide(m,tmp) )
+
+      continue
 
     move(m,x,y);
 
