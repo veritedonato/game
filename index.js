@@ -47,6 +47,31 @@ function collide(obj1,obj2) {
 
 }
 
+
+
+for ( var x = 0; x < window.innerWidth; x += 128 ) {
+
+  for ( var y = 0; y < window.innerHeight; y += 128 ) {
+
+  var chance = getRandomInt(1000);
+
+  if ( chance < 100 ) {
+
+        monsterX.push(x);
+        monsterY.push(y);
+
+    monster(x,y);
+
+  }
+
+
+
+
+}
+
+
+}
+
 function main() {
 
 
@@ -57,29 +82,6 @@ background("black");
 
 
 
-
-      for ( var x = 0; x < window.innerWidth; x += 128 ) {
-
-          for ( var y = 0; y < window.innerHeight; y += 128 ) {
-
-          var chance = getRandomInt(1000);
-
-          if ( chance < 100 ) {
-
-                monsterX.push(x);
-                monsterY.push(y);
-
-//            monster(x,y);
-
-          }
-
-
-
-
-  }
-
-
-}
 
 
 }
