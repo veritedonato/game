@@ -3,67 +3,56 @@ import './style.css';
 
 var index = [];
 
-function main(name) {
+var playerX, playerY;
+
+function main() {
 
   background("black");
 
 
-  player(250,250,name);
+  player(250,250);
+
+}
 
 
-  window.onkeydown = function(e) {
-
-      con
-
-    if ( e.keyChar == "w" || e.keyChar == "W" )
-  
-      if ( div = find(name) ) 
-
-        div.top -= 10;
-
-  
-    if ( e.keyChar == "s" || e.keyChar == "S" )
-
-  
-      if ( div = find(name) ) 
-
-        div.top += 10;
+window.onkeydown = function(e) {
 
 
-    if ( e.keyChar == "a" || e.keyChar == "A" )
+  if ( e.keyChar == "w" || e.keyChar == "W" ) {
 
+    playerY -= 10;  
+    
+    player(playerX,playerY);
 
-      
-    if ( div = find(name) ) 
-
-      div.left -= 10;
-
-    if ( e.keyChar == "d" || e.keyChar == "D" )
-
-      
-    if ( div = find(name) ) 
-
-    div.left += 10;
-
-  
   }
-  
-  
+
+  if ( e.keyChar == "s" || e.keyChar == "S" ) {
+
+
+  }
+
+
+  if ( e.keyChar == "a" || e.keyChar == "A" ) {
+
+
+  }
+
+
+  if ( e.keyChar == "d" || e.keyChar == "D" ) {
+
+
+  }
+
 
 }
 
  
 
-  document.getElementById ("startBtn").addEventListener ("click", function() {
 
-    var playerName = document.getElementById("playerName").value;
     
-    setInterval(main(playerName),100);
+    setInterval(main(),100);
 
-    document.getElementById('startGame').style.visibility = "hidden";
     
-    }
-  , false);
 
 function background(color) {
 
@@ -71,7 +60,7 @@ function background(color) {
 
 }
 
-function player(x,y,name) {
+function player(x,y) {
 
   var div = document.createElement('div');
 
@@ -81,7 +70,10 @@ function player(x,y,name) {
   div.style.width = 64 + "px";
   div.style.height = 64 + "px";
   div.style.backgroundColor = "green";
-  div.id = "player_" + name;
+  div.id = "player";
+
+  playerX = x;
+  playerY = y;
 
   document.body.appendChild(div);
 
@@ -89,7 +81,7 @@ function player(x,y,name) {
 
 }
 
-function monster(x,y,name) {
+function monster(x,y) {
 
   var div = document.createElement('div');
 
@@ -99,7 +91,7 @@ function monster(x,y,name) {
   div.style.width = 64 + "px";
   div.style.height = 64 + "px";
   div.style.backgroundColor = "red";
-  div.id = "monster_" + name;
+  div.id = "monster";
 
   document.body.appendChild(div);
 
@@ -107,7 +99,7 @@ function monster(x,y,name) {
 
 }
 
-function tile(x,y,name,c) {
+function tile(x,y,c) {
 
   var div = document.createElement('div');
 
@@ -117,7 +109,7 @@ function tile(x,y,name,c) {
   div.style.width = 64 + "px";
   div.style.height = 64 + "px";
   div.style.backgroundColor = c;
-  div.id = "tile_" + name;
+  div.id = "tile";
 
   document.body.appendChild(div);
 
@@ -125,7 +117,7 @@ function tile(x,y,name,c) {
 
 }
 
-function quest(x,y,name,text) {
+function quest(x,y,text) {
 
   var div = document.createElement('div');
 
@@ -135,7 +127,7 @@ function quest(x,y,name,text) {
   div.style.width = 64 + "px";
   div.style.height = 64 + "px";
   div.style.backgroundColor = "white";
-  div.id = "quest_" + name;
+  div.id = "quest";
   div.innerHTML = text;
 
   document.body.appendChild(div);
@@ -148,16 +140,4 @@ function quest(x,y,name,text) {
 
 
 
-
-function find(name) {
-
-  for ( var div in index )
-
-    if ( div.id.indexOf(name) >= 0 )
-
-        return div;
-
-    return null;
-
-}
 
