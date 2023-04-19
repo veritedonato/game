@@ -87,8 +87,10 @@ setInterval(function() {
 
   for ( var m = 1; m < index.length; m++ ) {
 
+    var x =   getRandomInt(64);
+    var y =   getRandomInt(64);
 
-    
+    move(m,x,y);
 
   }
 
