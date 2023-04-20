@@ -12,39 +12,75 @@ function getRandomInt(max) {
 
 function collide(obj1,obj2) {
 
+  var x = Number(obj1.style.left.replace("px",""));
+  var y = Number(obj1.style.top.replace("px",""));
+  var x2 = Number(obj2.style.left.replace("px",""));
+  var y2 = Number(obj2.style.top.replace("px",""));
 
-  if (obj1.style.left < 64 || obj1.style.left > window.innerWidth  - 64 )  {
 
-    return 0;
+  if (x < 0 )  {
+
+
+    x += 64;
+
+
+
+    obj1.style.left = x + "px";
+
+  }
+  if (x > window.innerWidth  )  {
+
+
+
+    x -= 64;
+
+
+
+    obj1.style.left = x + "px";
+
+  }
+  if (y < 0 )  {
+
+
+
+    y += 64;
+
+
+
+    obj1.style.top = y + "px";
+
+  }
+  if (y > window.innerHeight   )  {
+
+
+    y -= 64;
+
+
+    obj1.style.top = y + "px";
 
   }
 
 
-  if (obj1.style.top < 64 || obj1.style.top > window.innerHeight - 64 )  {
+    if (x < x2 + 64 && x > x2 - 64 ) 
+      if (y < y2 + 64 && y > y2 - 64 ) 
 
-    return 1;
+        {
 
-  }
-  if (obj2.style.left < 64 || obj2.style.left > window.innerWidth - 64)  {
 
-    return 0;
+          x += 128;
+      
+          obj1.style.left = x + "px";
 
-  }
 
-  if (obj2.style.top < 64 || obj2.style.top > window.innerHeight  - 64)  {
 
-    return 1;
 
-  }
+                    
 
-    if (obj1.style.left < obj2.style.left + 64 && obj1.style.left > obj2.style.left - 64 ) 
-      if (obj1.style.top < obj2.style.top + 64 && obj1.style.top > obj2.style.top - 64 ) 
-
-        return 2;
+        }
 
 
    
-  return -1;
+  return false;
 
 }
 
@@ -136,17 +172,6 @@ setInterval(function() {
       y = -64;
       
 
-
-    var signedx = getRandomInt(1000);
-    var signedy = getRandomInt(1000);
-
-    if ( signedx < 500 )
-
-    x = -x;
-    if ( signedy < 500 )
-
-    y = -y;
-
     move(m1,x,y);
 
   }
@@ -156,30 +181,24 @@ setInterval(function() {
 
 function move(i,x,y) {
 
-  
-monsterX[i] += x;
-monsterY[i] += y;
 
+  
 
   for ( var m1 = 1; m1 < index.length; m1++ ) {
 
 
-      if ( collide(index[i],index[m1]) != -1 )
-
-      {
-
-        index[i].style.top = (monsterY[m1] - 128) + "px";
-        index[i].style.left = (monsterX[m1] - 128) + "px";
-  
-
-      }
-    
+      collide(index[i],index[m1]);
 
 
     }
 
+  
 
+    monsterX[i] += (x);
+    monsterY[i] += (y);
 
+    index[i].style.top = monsterY[i] + "px";
+    index[i].style.left = monsterX[i] + "px";
 
 
 
