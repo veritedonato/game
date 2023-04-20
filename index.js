@@ -117,27 +117,8 @@ background("black");
     
     npc(x,y);
     
-      }
+      }     
 
-        
-
-      for ( var x = 0; x < window.innerWidth;  x++ ) {
-        for ( var y = 0; y < window.innerHeight;  y++ ) {
-    
-            var chance = getRandomInt(1000);
-    
-            if ( chance < 10 ) {
-    
-        tileX.push(x);
-        tileY.push(y);
-      
-      tile(x,y);
-    
-            }
-    
-        }
-    
-        }
     
     
 
