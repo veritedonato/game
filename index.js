@@ -3,6 +3,8 @@ import './style.css';
 
 var index = [];
 
+var tiles = [];
+
 var playerX, playerY, playerHealth = 1000;
 
 var questTarget = null;
@@ -10,6 +12,7 @@ var questTarget = null;
 var monsterX = [], monsterY = [];
 var tileX = [], tileY = [];
 var npcX = [], npcY = [];
+var tileX = [], tileY = [];
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -93,7 +96,7 @@ function main() {
 background("black");
 
 
-  player(250,250);
+  player(256,256);
 
   for ( var i = 0; i < 5; i++ ) {
 
@@ -124,7 +127,40 @@ background("black");
 
 }
 
+var a = 0, b = 0;
 
+setInterval(function() {
+
+  var chance = getRandomInt(1000);
+
+  if ( chance < 100 ) {
+
+      tile(a,b);
+
+      tileX.push(a);
+      tileY.push(b);
+
+
+  }
+
+  a += 64;
+
+  if ( a > window.innerWidth )
+
+    {
+
+        a = 0;
+
+        b += 64;
+
+
+        if ( b > window.innerHeight )
+
+            clearInterval(this);
+
+    }
+
+},1);
 
 
 document.getElementById('status').innerHTML = "Health: " + playerHealth;
@@ -200,8 +236,15 @@ setInterval(function() {
       var x = getRandomInt(window.innerWidth);
       var y = getRandomInt(window.innerHeight);
 
+      if ( questTarget )
+
+        document.body.removeChild(questTarget);
+
+
         questTarget = quest(x,y);
+
         
+
   
     }
 
@@ -209,7 +252,33 @@ setInterval(function() {
 
     {
 
-              
+      var m1x = index[0].style.left.replace('px','');
+      var m1y = index[0].style.top.replace('px','');
+
+      if ( tileX[m1] < m1x + 64 ) {
+
+        tileX[m1] = m1x  + 128;
+
+        if ( tileX[m1] > m1x  - 64 )
+
+        tileX[m1] = m1x   - 64;
+
+      }
+
+      if ( tileY[m1] < m1y + 64 ) {
+
+        tileY[m1] = m1y + 128 ;
+
+        if ( tileY[m1] > m1y  - 64 )
+
+        tileY[m1] = m1y   - 64 ;
+
+      }
+
+
+      index[0].style.left = tileX[m1] + "px";
+      index[0].style.top = tileY[m1] + "px";
+
   
     }
     
