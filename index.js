@@ -5,8 +5,7 @@ var index = [];
 
 var playerX, playerY, playerHealth = 1000;
 
-document.getElementById('status').innerHTML = "Health: " + playerHealth;
-
+var questTarget = null;
 
 var monsterX = [], monsterY = [];
 
@@ -17,17 +16,17 @@ function getRandomInt(max) {
 
 function collide(obj1,obj2) {
 
-  var x = Number(obj1.style.left.replace("px",""));
-  var y = Number(obj1.style.top.replace("px",""));
-  var x2 = Number(obj2.style.left.replace("px",""));
-  var y2 = Number(obj2.style.top.replace("px",""));
+  var x = obj1.style.left.replace("px","");
+  var y = obj1.style.top.replace("px","");
+  var x2 = obj2.style.left.replace("px","");
+  var y2 = obj2.style.top.replace("px","");
 
 
   if (x2 < 64 )  {
 
 
 
-    x2 = 64;
+    x2 = 128;
 
     obj2.style.left = x2 + 'px';
 
@@ -36,7 +35,7 @@ function collide(obj1,obj2) {
 }
 if (x2 > window.innerWidth  - 64 )  {
 
-    x2 = window.innerWidth - 64;
+    x2 = window.innerWidth - 128;
 
     obj2.style.left = x2 + 'px';
 
@@ -47,7 +46,7 @@ if (y2 < 64 )  {
 
 
 
-  y2 = 64;
+  y2 = 128;
 
   obj2.style.top = y2 + 'px';
 
@@ -57,7 +56,7 @@ if (y2 < 64 )  {
 }
 if (y2 > window.innerHeight  - 64 )  {
 
-  y2 = window.innerHeight - 64;
+  y2 = window.innerHeight - 128;
 
   obj2.style.top = y2 + 'px';
 
@@ -72,13 +71,6 @@ if (y2 > window.innerHeight  - 64 )  {
 
         {
 
-
-          x2 = x - 64;
-
-          y2 = y - 64;
-
-          obj2.style.left = x2 + 'px';
-          obj2.style.top = y2 + 'px';
 
             return 1;
                     
@@ -101,34 +93,56 @@ background("black");
 
   player(250,250);
 
+  for ( var i = 0; i < 5; i++ ) {
 
-  for ( var x = 0; x < window.innerWidth; x += 128 ) {
-
-    for ( var y = 0; y < window.innerHeight; y += 128 ) {
+    var x = getRandomInt(window.innerWidth);
+    var y = getRandomInt(window.innerHeight);
   
-    var chance = getRandomInt(1000);
+    monsterX.push(x);
+    monsterY.push(y);
   
-    if ( chance < 100 ) {
-  
-          monsterX.push(x);
-          monsterY.push(y);
-  
-      monster(x,y);
+  monster(x,y);
   
     }
-  
-  
-  
-  
-  }
-  
-  
-  }
 
+    for ( var i = 0; i < 5; i++ ) {
 
+      var x = getRandomInt(window.innerWidth);
+      var y = getRandomInt(window.innerHeight);
+    
+      monsterX.push(x);
+      monsterY.push(y);
+    
+    npc(x,y);
+    
+      }
+
+      for ( var x = 0; x < window.innerWidth;  x++ ) {
+        for ( var y = 0; y < window.innerHeight;  y++ ) {
+
+            var chance = getRandomInt(1000);
+
+            if ( chance < 10 ) {
+
+        monsterX.push(x);
+        monsterY.push(y);
+      
+      tile(x,y);
+
+            }
+
+        }
+
+        }
+        
 
 
 }
+
+document.getElementById('status').innerHTML = "Health: " + playerHealth;
+
+
+
 
 setInterval(function() {
 
@@ -138,8 +152,8 @@ setInterval(function() {
     var dirx =   getRandomInt(1000);
     var diry =   getRandomInt(1000);
 
-    x = 0;
-    y = 0;
+    var x = 0;
+    var y = 0;
 
     if ( dirx < 250 )
 
@@ -163,6 +177,58 @@ setInterval(function() {
 
 },100);
 
+setInterval(function() {
+
+  for ( var m1 = 1; m1 < index.length; m1++ ) {
+
+
+    if ( collide(index[0],index[m1]) == 1 && index[m1].id == "monster" )
+
+    {
+  
+        playerHealth -= 10;
+  
+        document.getElementById('status').innerHTML = "Health: " + playerHealth;
+  
+        if ( playerHealth < 0 ) {
+  
+  
+            playerHealth = 0;
+  
+                document.getElementById('status').innerHTML = "Game Over. Refresh the Page to play again.";
+  
+        }
+  
+    }
+
+    if ( collide(index[0],index[m1]) == 1 && index[m1].id == "npc" )
+
+    {
+
+
+      document.getElementById('status').innerHTML = "I have a quest for you!";
+
+      
+      var x = getRandomInt(window.innerWidth);
+      var y = getRandomInt(window.innerHeight);
+
+        questTarget = quest(x,y);
+        
+  
+    }
+
+    if ( collide(index[0],index[m1]) == 1 && index[m1].id == "tile" )
+
+    {
+
+              
+  
+    }
+    
+}
+
+},250);
+
 function move(i,x,y) {
 
 
@@ -178,22 +244,6 @@ function move(i,x,y) {
     }
 
 
-    if ( collide(index[i],index[0]) == 1 )
-
-      {
-
-          playerHealth -= 50;
-
-          if ( playerHealth < 0 ) {
-
-
-              playerHealth = 0;
-
-                  document.getElementById('status').innerHTML = "Game Over. Refresh the Page to play again.";
-
-          }
-
-      }
 
 
     monsterX[i] += (x);
@@ -209,6 +259,10 @@ function move(i,x,y) {
 
 
 window.onkeydown = function(e) {
+
+  if ( playerHealth == 0 )
+
+      return;
 
 
   if ( e.keyCode == 37 ) {
@@ -314,7 +368,7 @@ function npc(x,y) {
   div.style.top = y + "px";
   div.style.width = 64 + "px";
   div.style.height = 64 + "px";
-  div.style.backgroundColor = "bisque";
+  div.style.backgroundColor = "yellow";
   div.id = "npc";
 
   document.body.appendChild(div);
@@ -354,7 +408,7 @@ function tile(x,y) {
   div.style.top = y + "px";
   div.style.width = 64 + "px";
   div.style.height = 64 + "px";
-  div.style.backgroundColor = "maroon";
+  div.style.backgroundColor = "grey";
   div.id = "tile";
 
   document.body.appendChild(div);
@@ -365,7 +419,7 @@ function tile(x,y) {
 
 }
 
-function quest(x,y,text) {
+function quest(x,y) {
 
   var div = document.createElement('div');
 
@@ -376,11 +430,10 @@ function quest(x,y,text) {
   div.style.height = 64 + "px";
   div.style.backgroundColor = "white";
   div.id = "quest";
-  div.innerHTML = text;
-
-  document.body.appendChild(div);
 
   index.push(div);
+
+  document.body.appendChild(div);
 
   return div;
 
