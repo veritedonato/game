@@ -8,6 +8,8 @@ var playerX, playerY, playerHealth = 1000;
 var questTarget = null;
 
 var monsterX = [], monsterY = [];
+var tileX = [], tileY = [];
+var npcX = [], npcY = [];
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -110,34 +112,39 @@ background("black");
       var x = getRandomInt(window.innerWidth);
       var y = getRandomInt(window.innerHeight);
     
-      monsterX.push(x);
-      monsterY.push(y);
+      npcX.push(x);
+      npcY.push(y);
     
     npc(x,y);
     
       }
 
-      for ( var x = 0; x < window.innerWidth;  x++ ) {
-        for ( var y = 0; y < window.innerHeight;  y++ ) {
-
-            var chance = getRandomInt(1000);
-
-            if ( chance < 10 ) {
-
-        monsterX.push(x);
-        monsterY.push(y);
-      
-      tile(x,y);
-
-            }
-
-        }
-
-        }
         
 
+      for ( var x = 0; x < window.innerWidth;  x++ ) {
+        for ( var y = 0; y < window.innerHeight;  y++ ) {
+    
+            var chance = getRandomInt(1000);
+    
+            if ( chance < 10 ) {
+    
+        tileX.push(x);
+        tileY.push(y);
+      
+      tile(x,y);
+    
+            }
+    
+        }
+    
+        }
+    
+    
 
 }
+
+
+
 
 document.getElementById('status').innerHTML = "Health: " + playerHealth;
 
