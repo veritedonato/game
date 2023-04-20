@@ -2,16 +2,14 @@
 #status {
 
   font-family: arial;
-  font-size: 24;
+  font-size: 48;
   color: yellow;
   font-weight: bold;
 
   position: absolute;
 
-  left: 25;
-  top: 25;
-  width: 500;
-  height: 250;
+  left: 0;
+  top: 0;
 
 
 }

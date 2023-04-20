@@ -1,4 +1,6 @@
 
+import './style.css';
+
 var index = [];
 
 var playerX, playerY, playerHealth = 1000;
