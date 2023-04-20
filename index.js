@@ -1,7 +1,10 @@
 
 var index = [];
 
-var playerX, playerY;
+var playerX, playerY, playerHealth = 1000;
+
+document.getElementById('status').innerHTML = "Health: " + playerHealth;
+
 
 var monsterX = [], monsterY = [];
 
@@ -18,47 +21,48 @@ function collide(obj1,obj2) {
   var y2 = Number(obj2.style.top.replace("px",""));
 
 
-  if (x < 0 )  {
-
-
-    x += 64;
+  if (x2 < 64 )  {
 
 
 
-    obj1.style.left = x + "px";
+    x2 = 64;
 
-  }
-  if (x > window.innerWidth  )  {
+    obj2.style.left = x2 + 'px';
 
+    return 0;
 
+}
+if (x2 > window.innerWidth  - 64 )  {
 
-    x -= 64;
+    x2 = window.innerWidth - 64;
 
+    obj2.style.left = x2 + 'px';
 
+  return 0;
 
-    obj1.style.left = x + "px";
-
-  }
-  if (y < 0 )  {
-
-
-
-    y += 64;
+}
+if (y2 < 64 )  {
 
 
 
-    obj1.style.top = y + "px";
+  y2 = 64;
 
-  }
-  if (y > window.innerHeight   )  {
+  obj2.style.top = y2 + 'px';
 
-
-    y -= 64;
+  return 0;
 
 
-    obj1.style.top = y + "px";
+}
+if (y2 > window.innerHeight  - 64 )  {
 
-  }
+  y2 = window.innerHeight - 64;
+
+  obj2.style.top = y2 + 'px';
+
+  return 0;
+
+
+}
 
 
     if (x < x2 + 64 && x > x2 - 64 ) 
@@ -67,20 +71,20 @@ function collide(obj1,obj2) {
         {
 
 
-          x += 128;
-      
-          obj1.style.left = x + "px";
+          x2 = x - 64;
 
+          y2 = y - 64;
 
+          obj2.style.left = x2 + 'px';
+          obj2.style.top = y2 + 'px';
 
-
+            return 1;
                     
 
         }
 
-
+        return -1;
    
-  return false;
 
 }
 
@@ -126,28 +130,6 @@ background("black");
 
 setInterval(function() {
 
-  for ( var m1 = 1; m1 < index.length; m1++ ) {
-
-    for ( var m2 = 1; m2 < index.length; m2++ ) {
-
-          if ( collide(index[m1],index[m2]) )
-
-          {
-
-                
-              
-
-          }
-
-    }
-
-}
-
-
-},100);
-
-setInterval(function() {
-
 
   for ( var m1 = 1; m1 < index.length; m1++ ) {
 
@@ -187,12 +169,30 @@ function move(i,x,y) {
   for ( var m1 = 1; m1 < index.length; m1++ ) {
 
 
-      collide(index[i],index[m1]);
+     collide(index[i],index[m1]);
+
 
 
     }
 
-  
+
+    if ( collide(index[i],index[0]) == 1 )
+
+      {
+
+          playerHealth -= 50;
+
+          if ( playerHealth < 0 ) {
+
+
+              playerHealth = 0;
+
+                  document.getElementById('status').innerHTML = "Game Over. Refresh the Page to play again.";
+
+          }
+
+      }
+
 
     monsterX[i] += (x);
     monsterY[i] += (y);
@@ -213,7 +213,7 @@ window.onkeydown = function(e) {
 
     playerX -= 64;
 
-    if ( playerX < 0 || playerX > window.innerWidth )
+    if ( playerX < 64 || playerX > window.innerWidth - 64 )
 
     return
 
@@ -226,7 +226,7 @@ if ( e.keyCode == 39 ) {
 
   playerX += 64;
 
-  if ( playerX < 0 || playerX > window.innerWidth )
+  if ( playerX < 64 || playerX > window.innerWidth  - 64 )
 
       return
 
@@ -239,7 +239,7 @@ if ( e.keyCode == 38 ) {
 
   playerY -= 64;
 
-  if ( playerY < 0 || playerY > window.innerHeight )
+  if ( playerY < 64 || playerY > window.innerHeight - 64 )
 
       return
 
@@ -254,7 +254,7 @@ if ( e.keyCode == 40 ) {
 
   playerY += 64;
 
-  if ( playerY < 0 || playerY > window.innerHeight )
+  if ( playerY < 64 || playerY > window.innerHeight  - 64)
 
       return
 
